@@ -30,8 +30,8 @@ public class Book {
 	private String title;
 	
 	//@Column(name="author")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="Id_Artist")
+	@ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	@JoinColumn(name="Author")
 	private Author author;
 	
 	@Column(name="synopsis")
@@ -39,7 +39,7 @@ public class Book {
 	
 	//@Column(name="genres")
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(name="Id_Genre")
+	@JoinColumn(name="Genre")
 	private Genre genre;
 	
 	@Column(name="image")

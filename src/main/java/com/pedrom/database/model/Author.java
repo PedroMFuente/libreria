@@ -24,7 +24,7 @@ public class Author {
 	private String name;
 	
 	//@Column(name="booklist")
-	@OneToMany(mappedBy = "author", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "author", cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private List<Book> booklist;
 
 	public Long getId() {

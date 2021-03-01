@@ -34,11 +34,11 @@ public class User {
 	private String image;
 	
 	//lista de libros a los que le has dado like
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "likeUser")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "likeUser")
 	private List<Book> bookslike;
 	
 	//lista de reviews que has hecho
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Review> reviewlist;
 
 	public Long getId() {

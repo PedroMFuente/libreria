@@ -22,7 +22,7 @@ public class Review {
 	private Long id;
 	
 	//manytomany
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="user")
 	private User user;
 	
@@ -32,7 +32,7 @@ public class Review {
 	@Column(name="text")
 	private String text;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="book")
 	private Book book;
 	

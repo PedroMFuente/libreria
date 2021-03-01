@@ -30,7 +30,7 @@ public class Book {
 	private String title;
 	
 	//@Column(name="author")
-	@ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
 	@JoinColumn(name="Author")
 	private Author author;
 	
@@ -50,11 +50,11 @@ public class Book {
 			joinColumns = @JoinColumn(name="Id_Book",nullable=false),
 			inverseJoinColumns = @JoinColumn(name="Id_User",nullable=false)
 			)
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<User> likeUser;
 	
 	//reseñas
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "book")
 	private List<Review> reviewlist;
 	
 

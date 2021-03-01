@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name="Users")
 public class User {
 
 	@Id
@@ -38,7 +38,7 @@ public class User {
 	private List<Book> bookslike;
 	
 	//lista de reviews que has hecho
-	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "creator")
 	private List<Review> reviewlist;
 
 	public Long getId() {

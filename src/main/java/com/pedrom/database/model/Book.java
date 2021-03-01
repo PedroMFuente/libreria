@@ -46,7 +46,7 @@ public class Book {
 	private String image;
 	
 	@JoinTable(
-			name="likeuser",
+			name="likeUser",
 			joinColumns = @JoinColumn(name="Id_Book",nullable=false),
 			inverseJoinColumns = @JoinColumn(name="Id_User",nullable=false)
 			)

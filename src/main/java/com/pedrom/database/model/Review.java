@@ -23,8 +23,8 @@ public class Review {
 	
 	//manytomany
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(name="user")
-	private User user;
+	@JoinColumn(name="creator")
+	private User creator;
 	
 	@Column(name="image")
 	private String image;
@@ -46,11 +46,11 @@ public class Review {
 	}
 
 	public User getUser() {
-		return user;
+		return creator;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.creator = user;
 	}
 
 	public String getImage() {
@@ -79,6 +79,6 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", user=" + user + ", image=" + image + ", text=" + text + ", book=" + book + "]";
+		return "Review [id=" + id + ", user=" + creator + ", image=" + image + ", text=" + text + ", book=" + book + "]";
 	}
 }

@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,10 +34,11 @@ public class User {
 	private String image;
 	
 	//lista de libros a los que le has dado like
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "likeuser")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "likeUser")
 	private List<Book> bookslike;
 	
 	//lista de reviews que has hecho
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Review> reviewlist;
 
 	public Long getId() {

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
@@ -37,15 +38,15 @@ public class Book {
 	private String synopsis;
 	
 	//@Column(name="genres")
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="Id_Genre")
-	private List<Genre> genres;
+	private Genre genre;
 	
 	@Column(name="image")
 	private String image;
 	
 	@JoinTable(
-			name="like",
+			name="likeuser",
 			joinColumns = @JoinColumn(name="Id_Book",nullable=false),
 			inverseJoinColumns = @JoinColumn(name="Id_User",nullable=false)
 			)
@@ -53,12 +54,7 @@ public class Book {
 	private List<User> likeUser;
 	
 	//reseñas
-	@JoinTable(
-			name="reviewlist",
-			joinColumns = @JoinColumn(name="Id_Book",nullable = false),
-			inverseJoinColumns = @JoinColumn(name="Id_Review",nullable=false)
-			)
-	@ManyToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
 	private List<Review> reviewlist;
 	
 
@@ -102,12 +98,12 @@ public class Book {
 		this.synopsis = synopsis;
 	}
 
-	public List<Genre> getGenres() {
-		return genres;
+	public Genre getGenres() {
+		return genre;
 	}
 
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	public void setGenres(Genre genre) {
+		this.genre = genre;
 	}
 	
 
@@ -130,6 +126,6 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", synopsis=" + synopsis + ", genres="
-				+ genres + "]";
+				+ genre + "]";
 	}
 }

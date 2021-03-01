@@ -3,10 +3,14 @@ package com.pedrom.database.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,8 @@ public class Review {
 	private Long id;
 	
 	//manytomany
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="user")
 	private User user;
 	
 	@Column(name="image")
@@ -26,8 +32,8 @@ public class Review {
 	@Column(name="text")
 	private String text;
 	
-	//manytomany
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "reviewlist")
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="book")
 	private Book book;
 	
 

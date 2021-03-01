@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Book")
 public class Book {
@@ -30,7 +32,8 @@ public class Book {
 	private String title;
 	
 	//@Column(name="author")
-	@ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
+	@JsonIgnoreProperties("booklist")
+	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.MERGE)
 	@JoinColumn(name="Author")
 	private Author author;
 	
@@ -45,6 +48,7 @@ public class Book {
 	@Column(name="image")
 	private String image;
 	
+	@JsonIgnoreProperties("bookslike")
 	@JoinTable(
 			name="likeUser",
 			joinColumns = @JoinColumn(name="Id_Book",nullable=false),
@@ -54,6 +58,7 @@ public class Book {
 	private List<User> likeUser;
 	
 	//reseñas
+	@JsonIgnoreProperties("book")
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "book")
 	private List<Review> reviewlist;
 	
@@ -125,7 +130,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", synopsis=" + synopsis + ", genres="
+		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author.getName() + ", synopsis=" + synopsis + ", genres="
 				+ genre + "]";
 	}
 }

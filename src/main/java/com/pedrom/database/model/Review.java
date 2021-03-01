@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Review")
 public class Review {
@@ -22,6 +24,7 @@ public class Review {
 	private Long id;
 	
 	//manytomany
+	@JsonIgnoreProperties("reviewlist")
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="creator")
 	private User creator;
@@ -32,6 +35,7 @@ public class Review {
 	@Column(name="text")
 	private String text;
 	
+	@JsonIgnoreProperties("reviewlist")
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="book")
 	private Book book;
@@ -79,6 +83,6 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", user=" + creator + ", image=" + image + ", text=" + text + ", book=" + book + "]";
+		return "Review [id=" + id + ", user=" + creator.getNick() + ", image=" + image + ", text=" + text + ", book=" + book + "]";
 	}
 }

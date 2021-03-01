@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Users")
 public class User {
@@ -34,10 +36,12 @@ public class User {
 	private String image;
 	
 	//lista de libros a los que le has dado like
+	@JsonIgnoreProperties("likeUser")
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "likeUser")
 	private List<Book> bookslike;
 	
 	//lista de reviews que has hecho
+	@JsonIgnoreProperties("creator")
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "creator")
 	private List<Review> reviewlist;
 
